@@ -1,0 +1,23 @@
+[build]
+  command = "npm run build && npm run export"
+  publish = "out"
+
+[build.environment]
+  EXPORT_MODE = "true"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
