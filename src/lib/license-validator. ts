@@ -1,0 +1,252 @@
+"use client";
+
+/**
+ * SecureVision License Validator
+ * Client-side license validation system
+ */
+
+interface LicenseInfo {
+  customer: string;
+  licenseKey: string;
+  domain?: string;
+  features: string[];
+  expiresAt?: string;
+  version: string;
+}
+
+// This would be replaced with actual customer license during ZIP generation
+const LICENSE_CONFIG: LicenseInfo = {
+  customer: "DEMO_USER",
+  licenseKey: "sv-demo-2024-000000",
+  domain: "localhost",
+  features: ["basic", "admin", "mobile", "reports"],
+  version: "1.0.0"
+};
+
+export class LicenseValidator {
+  private static instance: LicenseValidator;
+  private licenseInfo: LicenseInfo;
+  private isValidated: boolean = false;
+
+  private constructor() {
+    this.licenseInfo = LICENSE_CONFIG;
+  }
+
+  public static getInstance(): LicenseValidator {
+    if (!LicenseValidator.instance) {
+      LicenseValidator.instance = new LicenseValidator();
+    }
+    return LicenseValidator.instance;
+  }
+
+  /**
+   * Validate the current license
+   */
+  public validateLicense(): boolean {
+    try {
+      // Check if license key format is valid
+      if (!this.isValidLicenseFormat(this.licenseInfo.licenseKey)) {
+        console.warn('Invalid license key format');
+        return false;
+      }
+
+      // Check domain restriction (in production)
+      if (typeof window !== 'undefined' && this.licenseInfo.domain) {
+        const currentDomain = window.location.hostname;
+        if (!this.isDomainAllowed(currentDomain)) {
+          console.warn('License not valid for this domain');
+          return false;
+        }
+      }
+
+      // Check expiration (if set)
+      if (this.licenseInfo.expiresAt) {
+        const expirationDate = new Date(this.licenseInfo.expiresAt);
+        if (new Date() > expirationDate) {
+          console.warn('License has expired');
+          return false;
+        }
+      }
+
+      // Demo license always passes for localhost
+      if (this.licenseInfo.licenseKey.includes('demo') && 
+          typeof window !== 'undefined' && 
+          window.location.hostname === 'localhost') {
+        this.isValidated = true;
+        return true;
+      }
+
+      // In a real implementation, you might check against a server
+      // For now, basic format validation
+      this.isValidated = true;
+      return true;
+
+    } catch (error) {
+      console.error('License validation error:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Check if a feature is available in the current license
+   */
+  public hasFeature(feature: string): boolean {
+    if (!this.isValidated && !this.validateLicense()) {
+      return false;
+    }
+    return this.licenseInfo.features.includes(feature);
+  }
+
+  /**
+   * Get license information
+   */
+  public getLicenseInfo(): Partial<LicenseInfo> {
+    return {
+      customer: this.licenseInfo.customer,
+      version: this.licenseInfo.version,
+      features: this.licenseInfo.features
+    };
+  }
+
+  /**
+   * Check if license key format is valid
+   */
+  private isValidLicenseFormat(key: string): boolean {
+    // Format: sv-{customer}-{year}-{hash}
+    const pattern = /^sv-[a-zA-Z0-9]+-\d{4}-[a-zA-Z0-9]+$/;
+    return pattern.test(key);
+  }
+
+  /**
+   * Check if current domain is allowed
+   */
+  private isDomainAllowed(currentDomain: string): boolean {
+    if (!this.licenseInfo.domain) return true;
+    
+    // Allow localhost for development
+    if (currentDomain === 'localhost' || currentDomain === '127.0.0.1') {
+      return true;
+    }
+
+    // Allow exact domain match
+    if (currentDomain === this.licenseInfo.domain) {
+      return true;
+    }
+
+    // Allow subdomains
+    if (currentDomain.endsWith('.' + this.licenseInfo.domain)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Show license error modal
+   */
+  public showLicenseError(): void {
+    if (typeof window !== 'undefined') {
+      const message = `
+SecureVision License Error
+
+This copy of SecureVision is not properly licensed for this domain.
+
+Customer: ${this.licenseInfo.customer}
+Domain: ${this.licenseInfo.domain || 'Any'}
+License: ${this.licenseInfo.licenseKey}
+
+Please contact support@securevision-system.com for assistance.
+      `;
+      
+      alert(message);
+    }
+  }
+}
+
+// Export singleton instance
+export const licenseValidator = LicenseValidator.getInstance();
+
+// React hook for using license validation
+export function useLicense() {
+  const [isValid, setIsValid] = React.useState<boolean | null>(null);
+  const [licenseInfo, setLicenseInfo] = React.useState<Partial<LicenseInfo> | null>(null);
+
+  React.useEffect(() => {
+    const validator = LicenseValidator.getInstance();
+    const valid = validator.validateLicense();
+    
+    setIsValid(valid);
+    setLicenseInfo(validator.getLicenseInfo());
+
+    if (!valid) {
+      // Show error after a brief delay to allow UI to load
+      setTimeout(() => {
+        validator.showLicenseError();
+      }, 2000);
+    }
+  }, []);
+
+  return {
+    isValid,
+    licenseInfo,
+    hasFeature: (feature: string) => licenseValidator.hasFeature(feature)
+  };
+}
+
+// Higher-order component for license protection
+export function withLicenseProtection<T extends object>(
+  WrappedComponent: React.ComponentType<T>,
+  requiredFeature?: string
+) {
+  return function LicenseProtectedComponent(props: T) {
+    const { isValid, hasFeature } = useLicense();
+
+    if (isValid === null) {
+      // Loading state
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Validating license...</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (!isValid) {
+      // Invalid license
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center max-w-md p-6 border rounded-lg">
+            <h2 className="text-xl font-bold text-red-600 mb-4">License Error</h2>
+            <p className="text-gray-600 mb-4">
+              This copy of SecureVision is not properly licensed.
+            </p>
+            <p className="text-sm text-gray-500">
+              Contact support@securevision-system.com for assistance.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    if (requiredFeature && !hasFeature(requiredFeature)) {
+      // Feature not available
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center max-w-md p-6 border rounded-lg">
+            <h2 className="text-xl font-bold text-orange-600 mb-4">Feature Unavailable</h2>
+            <p className="text-gray-600 mb-4">
+              This feature is not available in your current license.
+            </p>
+            <p className="text-sm text-gray-500">
+              Upgrade your license to access this feature.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return <WrappedComponent {...props} />;
+  };
+}
