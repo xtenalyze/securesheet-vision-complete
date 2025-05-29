@@ -1,0 +1,23 @@
+# SecureVision Google Sheets Headers
+# Copy and paste these headers into your Google Sheets
+
+## Incidents Sheet (Row 1):
+Timestamp	Incident_ID	Site	Reporting_Officer	Incident_DateTime	Shift	Incident_Type	Severity_Level	Specific_Location	Description	Client_Notified	Authorities_Contacted	Authority_Details	Actions_Taken	GPS_Coordinates	Witnesses_Present	Witness_Details	Related_Previous	Previous_Incident_Ref	Followup_Required	Followup_Details
+
+## Sites Sheet (Row 1):
+Timestamp	Site_Name	Site_Address	Site_Type	Contact_Email	Supervisor_Email	Risk_Level	Operating_Hours
+
+## Officers Sheet (Row 1):
+Timestamp	First_Name	Last_Name	Email	Phone	Badge_Number	Hire_Date	Certifications
+
+## Categories Sheet (Row 1):
+Timestamp	Category_Name	Description	Default_Severity	Requires_Notification	Response_Protocol
+
+## Shifts Sheet (Row 1):
+Timestamp	Site_Location	Shift_Name	Start_Time	End_Time	Days_of_Week	Assigned_Officer	Backup_Officer
+
+# Instructions:
+# 1. Create 5 sheets in your Google Spreadsheet with the exact names above
+# 2. Copy each header row to the corresponding sheet
+# 3. Make sure headers are in Row 1 of each sheet
+# 4. Headers should be tab-separated (copy/paste should work correctly)
