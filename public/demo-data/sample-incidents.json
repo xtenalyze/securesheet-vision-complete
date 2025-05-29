@@ -1,0 +1,67 @@
+[
+  {
+    "id": "INC001",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "site": "Downtown Office",
+    "officer": "John Doe",
+    "category": "Theft",
+    "severity": 8,
+    "location": "Reception Area",
+    "description": "Laptop reported missing from reception desk. Security footage being reviewed.",
+    "status": "Open",
+    "clientNotified": true,
+    "authoritiesInvolved": true
+  },
+  {
+    "id": "INC002", 
+    "timestamp": "2024-01-14T14:15:00Z",
+    "site": "Warehouse A",
+    "officer": "Jane Smith",
+    "category": "Vandalism",
+    "severity": 5,
+    "location": "Loading Dock",
+    "description": "Graffiti found on exterior wall of loading dock. Maintenance notified for cleanup.",
+    "status": "Resolved",
+    "clientNotified": false,
+    "authoritiesInvolved": false
+  },
+  {
+    "id": "INC003",
+    "timestamp": "2024-01-13T18:45:00Z", 
+    "site": "Retail Store",
+    "officer": "Mike Brown",
+    "category": "Suspicious Activity",
+    "severity": 3,
+    "location": "Electronics Section",
+    "description": "Customer observed acting suspiciously around high-value electronics. Monitored until departure.",
+    "status": "Closed",
+    "clientNotified": false,
+    "authoritiesInvolved": false
+  },
+  {
+    "id": "INC004",
+    "timestamp": "2024-01-12T09:20:00Z",
+    "site": "Downtown Office", 
+    "officer": "Sarah Lee",
+    "category": "Medical Emergency",
+    "severity": 9,
+    "location": "3rd Floor Conference Room",
+    "description": "Employee experienced chest pains during meeting. Emergency services called immediately.",
+    "status": "Resolved",
+    "clientNotified": true,
+    "authoritiesInvolved": true
+  },
+  {
+    "id": "INC005",
+    "timestamp": "2024-01-11T22:10:00Z",
+    "site": "Warehouse A",
+    "officer": "David Green", 
+    "category": "Access Control Breach",
+    "severity": 7,
+    "location": "Secure Storage Area",
+    "description": "Unauthorized person found in secure storage area. Badge access logs being investigated.",
+    "status": "Investigating",
+    "clientNotified": true,
+    "authoritiesInvolved": false
+  }
+]
