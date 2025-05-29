@@ -1,21 +1,128 @@
-MIT License
+# SecureVision Commercial License
 
-Copyright (c) 2025 xtenalyze
+## Copyright Notice
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Copyright © 2024 SecureVision Systems. All rights reserved.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## License Grant
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This software and associated documentation files (the "Software") are licensed, not sold. Your rights to use the Software are specified in this license.
+
+### Permitted Uses
+
+Subject to the terms of this license and your valid license purchase, you are granted:
+
+1. **Installation Rights**: Install and use the Software on devices you own or control
+2. **Modification Rights**: Modify the Software for your internal business purposes
+3. **Deployment Rights**: Deploy the Software for your organization's use
+4. **Branding Rights**: Customize the Software with your organization's branding
+
+### License Tiers
+
+#### Standard License ($297)
+- Use by single organization
+- Up to 10 sites and 50 officers
+- Commercial use permitted
+- No redistribution rights
+
+#### Professional License ($497)  
+- Multi-client/organization use
+- Unlimited sites and officers
+- Commercial service provision permitted
+- No redistribution rights
+
+#### Enterprise License ($997)
+- All Professional features
+- White-label customization rights
+- Limited redistribution rights (contact for terms)
+- Source code modification rights
+
+### Restrictions
+
+You may NOT:
+
+1. **Redistribute** the Software without explicit written permission
+2. **Reverse Engineer** the license protection mechanisms
+3. **Remove** license validation or copyright notices
+4. **Create Derivative Works** for redistribution
+5. **Use** the Software outside the scope of your license tier
+6. **Share** your license key with unauthorized parties
+
+### License Validation
+
+This Software includes technical measures to verify license compliance:
+- License key validation on startup
+- Domain verification for deployed instances  
+- Feature restrictions based on license tier
+- Usage monitoring for compliance verification
+
+### Termination
+
+This license terminates automatically if you:
+- Violate any terms of this license
+- Attempt to circumvent license protection
+- Use the Software beyond your licensed scope
+- Fail to pay required license fees
+
+Upon termination, you must cease all use and destroy all copies.
+
+### Support and Updates
+
+Licensed users receive:
+- Email support during license period
+- Software updates for one year from purchase
+- Access to documentation and setup assistance
+- Community forum access
+
+### Liability Limitation
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+### Governing Law
+
+This license is governed by the laws of [YOUR_JURISDICTION]. Any disputes shall be resolved in the courts of [YOUR_JURISDICTION].
+
+### Contact Information
+
+For licensing questions or to report violations:
+
+**SecureVision Systems**
+- Email: legal@securevision-system.com
+- Support: support@securevision-system.com
+- Website: https://securevision-system.com
+
+---
+
+## Third-Party Licenses
+
+This Software incorporates the following open-source components:
+
+### Next.js
+- License: MIT
+- Copyright: Vercel, Inc.
+
+### React
+- License: MIT  
+- Copyright: Facebook, Inc.
+
+### Tailwind CSS
+- License: MIT
+- Copyright: Tailwind Labs, Inc.
+
+### Radix UI
+- License: MIT
+- Copyright: Modulz, Inc.
+
+### Lucide React
+- License: ISC
+- Copyright: Lucide Contributors
+
+### QRCode.react
+- License: ISC
+- Copyright: Paul O'Shannessy
+
+For complete third-party license information, see `package.json` dependencies.
+
+---
+
+**By using this Software, you acknowledge that you have read, understood, and agree to be bound by the terms of this license.**
